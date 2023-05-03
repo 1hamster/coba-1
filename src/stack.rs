@@ -3,11 +3,14 @@ use crate::Stack;
 // TODO Complete implementation
 impl Stack for Vec<i32> {
     fn init() -> Self {
-        todo!()
+        let vec: Vec<i32> = Vec::new();
+        vec
+        //todo!()
     }
 
     fn push_val(&mut self, i: i32) {
-        todo!()
+        self.push(i);
+        //todo!()
     }
 
     fn top_val(&self) -> Option<&i32> {
