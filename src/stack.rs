@@ -14,15 +14,27 @@ impl Stack for Vec<i32> {
     }
 
     fn top_val(&self) -> Option<&i32> {
-        todo!()
+        let last: Option<&i32> =self.last();
+        match last {
+            None => None,
+            Some(i) => Some(i),
+        }
+        //todo!()
     }
 
     fn pop_val(&mut self) -> Option<i32> {
-        todo!()
+        let last: Option<i32> = self.pop();
+        match last {
+            None => None,
+            Some(i) => Some(i),
+        }
+        //todo!()
     }
 
     fn is_empty(&self) -> bool {
-        todo!()
+        let is_empty: bool = self.is_empty();
+        is_empty
+        //todo!()
     }
 }
 
