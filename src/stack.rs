@@ -55,13 +55,24 @@ impl Stack for ListStack {
 
     fn push_val(&mut self, i: i32) {
         match self {
-            Val(value, other) => *self = todo!(),
-            Nil => *self = todo!(),
+            Val(value, other) => {
+                *self = Val(i, other.take());
+                Nil
+            },
+
+            Nil => {
+                *self = Nil;
+                Nil
+            }
         };
     }
 
     fn top_val(&self) -> Option<&i32> {
-        todo!()
+        match self {
+            Val(value, other) => value,
+            Nil => Nil,
+        }
+        //todo!()
     }
 
     fn pop_val(&mut self) -> Option<i32> {
