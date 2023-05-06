@@ -68,9 +68,15 @@ impl Stack for ListStack {
     }
 
     fn top_val(&self) -> Option<&i32> {
-        match self {
-            Val(value, other) => value,
-            Nil => Nil,
+            match self {
+                Val(value, other) => {
+                    if let Some(next) = other.as_ref() {
+                        next.top_val()
+                    } else {
+                        Some(value)
+                    }
+                }
+                Nil => None,
         }
         //todo!()
     }
