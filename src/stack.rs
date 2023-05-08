@@ -55,30 +55,16 @@ impl Stack for ListStack {
 
     fn push_val(&mut self, i: i32) {
         match self {
-            Val(value, other) => {
-                *self = Val(i, other.take());
-                Nil
-            },
-
-            Nil => {
-                *self = Nil;
-                Nil
-            }
+            Val(value, other) => *self = Val(i, Some(Box::new(Val(*value, other.take())))),
+            Nil => *self = Val(i, None),
         };
     }
 
     fn top_val(&self) -> Option<&i32> {
-            match self {
-                Val(value, other) => {
-                    if let Some(next) = other.as_ref() {
-                        next.top_val()
-                    } else {
-                        Some(value)
-                    }
-                }
-                Nil => None,
+        match self {
+            Val(value, _) => Some(value),
+            Nil => None,
         }
-        //todo!()
     }
 
     fn pop_val(&mut self) -> Option<i32> {
@@ -87,16 +73,17 @@ impl Stack for ListStack {
                 let popped_value = *value;
                 match other.take() {
                     None => *self = Nil,
-                    Some(other) => todo!(),
+                    Some(other) => *self = *other,
                 };
-                todo!()
+                return Some(popped_value);
             }
             Nil => None,
         }
     }
 
     fn is_empty(&self) -> bool {
-        todo!()
+        self.top_val().is_none()
+        //todo!()
     }
 }
 
