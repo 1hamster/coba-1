@@ -75,7 +75,7 @@ impl Stack for ListStack {
                     None => *self = Nil,
                     Some(other) => *self = *other,
                 };
-                return Some(popped_value);
+                Some(popped_value)
             }
             Nil => None,
         }
